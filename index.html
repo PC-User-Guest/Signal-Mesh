@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Signal Mesh is an industrial data contract operations platform delivering real-time governance, observability, and simulation for OT/IT data streams."
+    />
+    <meta name="theme-color" content="#0b0f14" />
+    <meta property="og:title" content="Signal Mesh — Industrial Data Contract Operations Platform" />
+    <meta
+      property="og:description"
+      content="Operational certainty for every data stream with contract-aware governance, observability, and simulation."
+    />
+    <title>Signal Mesh — Industrial Data Contract Operations Platform</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="bg-grid"></div>
+    <a class="skip-link" href="#main">Skip to main content</a>
+    <header class="hero">
+      <nav class="nav" aria-label="Primary">
+        <div class="logo">Signal Mesh</div>
+        <div class="nav-links">
+          <a href="#overview">Overview</a>
+          <a href="#cockpit">Cockpit</a>
+          <a href="#personas">Personas</a>
+          <a href="#architecture">Architecture</a>
+          <a href="#design">Design System</a>
+          <a href="#simulation">Simulation</a>
+        </div>
+        <button class="nav-cta" type="button">Request Demo</button>
+      </nav>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">Industrial data contract operations</div>
+          <h1>Operational certainty for every data stream.</h1>
+          <p>
+            Signal Mesh codifies, monitors, and evolves industrial data contracts across
+            distributed OT/IT landscapes with simulation-grade governance and time-aware
+            observability.
+          </p>
+          <div class="hero-actions">
+            <button class="primary" type="button">Launch Control Room</button>
+            <button class="secondary" type="button">View Contract Graph</button>
+          </div>
+          <div class="hero-metrics">
+            <div class="metric">
+              <div class="value" id="heroStreams">50k+</div>
+              <div class="label">streams governed</div>
+            </div>
+            <div class="metric">
+              <div class="value" id="heroSla">99.94%</div>
+              <div class="label">SLA compliance</div>
+            </div>
+            <div class="metric">
+              <div class="value" id="heroResolution">8.2 min</div>
+              <div class="label">mean resolution</div>
+            </div>
+          </div>
+        </div>
+        <div class="hero-card">
+          <div class="card-header">Live Contract Pulse</div>
+          <div class="pulse-grid" id="pulseGrid"></div>
+          <div class="card-footer">
+            <span>Atlas Industrial Corp — global fabric</span>
+            <span class="status ok">Nominal</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+    <section id="overview" class="section">
+      <div class="section-header">
+        <h2>Executive overview</h2>
+        <p>
+          Signal Mesh treats every industrial data exchange as a contract with explicit
+          schema, freshness, quality, lineage, and ownership obligations. Contracts are
+          versioned as code, enforced in real time, and audited across the enterprise.
+        </p>
+      </div>
+      <div class="overview-grid">
+        <div class="overview-card">
+          <h3>Contractual operational cognition</h3>
+          <p>
+            Every stream is an agreement. We validate structure, temporal behavior, and
+            failure vectors continuously so operational intent stays explicit and enforceable.
+          </p>
+        </div>
+        <div class="overview-card">
+          <h3>Temporal awareness</h3>
+          <p>
+            Trace violations back to the exact moment they emerged. Time scrubber tooling
+            rewinds the entire contract landscape for forensic clarity.
+          </p>
+        </div>
+        <div class="overview-card">
+          <h3>Federated stewardship</h3>
+          <p>
+            Git-native workflows unify plant teams, data engineers, and compliance into a
+            shared contract lifecycle with review gates and cryptographic approval.
+          </p>
+        </div>
+        <div class="overview-card">
+          <h3>Metadata-first control plane</h3>
+          <p>
+            We ingest metadata, not payloads. This preserves OT safety, reduces bandwidth,
+            and delivers deep operational context without touching production data.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cockpit" class="section">
+      <div class="section-header">
+        <h2>Operational governance cockpit</h2>
+        <p>
+          A dense, time-aware workspace for monitoring contract health, resolving incidents,
+          and coordinating cross-functional teams under pressure.
+        </p>
+      </div>
+      <div class="cockpit">
+        <div class="cockpit-main">
+          <div class="cockpit-header">
+            <div>
+              <div class="title">Global Contract Topology</div>
+              <div class="sub">Rotterdam • Spartanburg • North Sea</div>
+            </div>
+            <div class="pill">Live</div>
+          </div>
+          <svg class="topology" id="topologyGraph" viewBox="0 0 640 360" role="img" aria-label="Contract topology graph">
+            <defs>
+              <linearGradient id="flow" x1="0" x2="1">
+                <stop offset="0%" stop-color="#4bd9c7" />
+                <stop offset="100%" stop-color="#5a7dff" />
+              </linearGradient>
+            </defs>
+            <g class="edges" id="topologyEdges"></g>
+            <g class="nodes" id="topologyNodes"></g>
+          </svg>
+          <div class="timeline">
+            <div class="timeline-label">Time scrubber</div>
+            <input id="timeScrubber" type="range" min="0" max="2" step="1" value="0" />
+            <div class="timeline-meta" id="timeLabel" aria-live="polite">Now • Nominal state</div>
+          </div>
+        </div>
+        <div class="cockpit-side">
+          <div class="panel">
+            <div class="panel-title">Active incidents</div>
+            <div id="incidentList"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Trust score</div>
+            <div class="trust-score">
+              <div class="score" id="trustScore">92</div>
+              <div class="score-meta">Composite data trust</div>
+            </div>
+            <div class="sparkline" id="trustSpark"></div>
+          </div>
+          <div class="panel">
+            <div class="panel-title">Alert routing</div>
+            <div class="route">
+              <span>PagerDuty</span>
+              <span class="tag">Connected</span>
+            </div>
+            <div class="route">
+              <span>ServiceNow</span>
+              <span class="tag">Synced</span>
+            </div>
+            <div class="route">
+              <span>xMatters</span>
+              <span class="tag">Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="drawer"
+        id="contractDrawer"
+        role="dialog"
+        aria-modal="false"
+        aria-hidden="true"
+        aria-labelledby="drawerTitle"
+        aria-describedby="drawerSubtitle"
+        tabindex="-1"
+      >
+        <div class="drawer-header">
+          <div>
+            <div class="drawer-title" id="drawerTitle">Contract details</div>
+            <div class="drawer-sub" id="drawerSubtitle"></div>
+          </div>
+          <button class="drawer-close" id="drawerClose" type="button" aria-label="Close">×</button>
+        </div>
+        <div class="drawer-body">
+          <div class="drawer-section">
+            <div class="panel-title">Status</div>
+            <div class="drawer-metrics" id="drawerMetrics"></div>
+          </div>
+          <div class="drawer-section">
+            <div class="panel-title">Schema diff</div>
+            <pre class="schema-diff" id="drawerSchema"></pre>
+          </div>
+          <div class="drawer-section">
+            <div class="panel-title">Lineage impact</div>
+            <ul class="drawer-list" id="drawerLineage"></ul>
+          </div>
+          <div class="drawer-section">
+            <div class="panel-title">Suggested actions</div>
+            <div class="drawer-actions" id="drawerActions"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="personas" class="section">
+      <div class="section-header">
+        <h2>Persona workspaces</h2>
+        <p>
+          Tailored operational views for plant teams, compliance officers, and executive
+          sponsors. Each workspace focuses on the decisions that matter most to the role.
+        </p>
+      </div>
+      <div class="persona-shell">
+        <div class="persona-tabs" role="tablist" aria-label="Persona selector">
+          <button class="persona-tab is-active" data-persona="plant" role="tab" type="button">Plant Engineer</button>
+          <button class="persona-tab" data-persona="compliance" role="tab" type="button">Compliance</button>
+          <button class="persona-tab" data-persona="executive" role="tab" type="button">Executive</button>
+        </div>
+        <div class="persona-grid">
+          <div class="panel persona-summary" id="personaSummary"></div>
+          <div class="panel persona-focus" id="personaFocus"></div>
+          <div class="panel persona-actions" id="personaActions"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture" class="section">
+      <div class="section-header">
+        <h2>Technical systems architecture</h2>
+        <p>
+          A distributed control plane composed of metadata ingestion, contract evaluation,
+          simulation, and observability pipelines.
+        </p>
+      </div>
+      <div class="architecture-grid">
+        <div class="arch-node">
+          <div class="arch-title">Ingestion</div>
+          <p>Kafka/Schema Registry, MQTT SYS topics, OPC-UA snapshots, OpenLineage.</p>
+        </div>
+        <div class="arch-node">
+          <div class="arch-title">Normalization</div>
+          <p>Canonical contract model, temporal metadata store, lineage graph.</p>
+        </div>
+        <div class="arch-node">
+          <div class="arch-title">Contract Engine</div>
+          <p>Schema-as-code validation, policy-as-code, runtime enforcement sidecars.</p>
+        </div>
+        <div class="arch-node">
+          <div class="arch-title">Observability</div>
+          <p>OpenTelemetry, violation telemetry, trust score computation, impact cones.</p>
+        </div>
+        <div class="arch-node">
+          <div class="arch-title">Simulation</div>
+          <p>Replay historical telemetry, branch contracts, probabilistic risk models.</p>
+        </div>
+        <div class="arch-node">
+          <div class="arch-title">Presentation</div>
+          <p>Topology cockpit, incident replay, audit-ready lineage views.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="design" class="section">
+      <div class="section-header">
+        <h2>Industrial DS design system</h2>
+        <p>
+          A purpose-built system for high-density operational interfaces, deployed as code
+          alongside contract infrastructure.
+        </p>
+      </div>
+      <div class="design-grid">
+        <div class="design-card">
+          <div class="token-title">Color semantics</div>
+          <div class="token-row">
+            <span class="swatch ok"></span>
+            <span>Nominal</span>
+            <span>#33d17a</span>
+          </div>
+          <div class="token-row">
+            <span class="swatch warn"></span>
+            <span>Warning</span>
+            <span>#f2a93b</span>
+          </div>
+          <div class="token-row">
+            <span class="swatch crit"></span>
+            <span>Critical</span>
+            <span>#ff4d4d</span>
+          </div>
+          <div class="token-row">
+            <span class="swatch sim"></span>
+            <span>Simulation</span>
+            <span>#4bb0ff</span>
+          </div>
+        </div>
+        <div class="design-card">
+          <div class="token-title">Operational primitives</div>
+          <ul>
+            <li>ContractGraphCanvas</li>
+            <li>TimeNavigator</li>
+            <li>HealthGauge</li>
+            <li>SchemaDiffView</li>
+            <li>PolicyViolationCard</li>
+          </ul>
+        </div>
+        <div class="design-card">
+          <div class="token-title">Type system</div>
+          <div class="type-stack">Signal Grotesk • 22/28</div>
+          <div class="type-stack">Signal Mono • 14/20</div>
+          <div class="type-stack">Caps labels • 12/16</div>
+          <p class="type-note">Tabular numerics keep telemetry aligned for scan speed.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="simulation" class="section">
+      <div class="section-header">
+        <h2>Simulation workspace</h2>
+        <p>
+          Test new contract versions against historical telemetry. Visualize projected
+          violations and downstream impacts before rollout.
+        </p>
+      </div>
+      <div class="simulation">
+        <div class="sim-panel">
+          <div class="sim-title">SLA impact model</div>
+          <label for="slaRange">Freshness SLA (seconds)</label>
+          <input id="slaRange" type="range" min="2" max="12" step="1" value="8" />
+          <div class="sim-metric">
+            <div class="value" id="slaValue">8s</div>
+            <div class="label">Proposed SLA</div>
+          </div>
+          <div class="sim-metric">
+            <div class="value" id="slaViolations">4.1%</div>
+            <div class="label">Estimated violations</div>
+          </div>
+          <div class="sim-actions">
+            <button class="secondary" type="button">Run replay</button>
+            <button class="primary" type="button">Publish branch</button>
+          </div>
+        </div>
+        <div class="sim-panel wide">
+          <div class="sim-title">Replay results</div>
+          <div class="sim-chart" id="simChart"></div>
+          <div class="sim-footer">
+            <div>
+              <div class="sim-key">Representativeness</div>
+              <div class="sim-value">0.82</div>
+            </div>
+            <div>
+              <div class="sim-key">Downstream impact</div>
+              <div class="sim-value">12 contracts at risk</div>
+            </div>
+            <div>
+              <div class="sim-key">Confidence</div>
+              <div class="sim-value">Medium</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div>Signal Mesh — operational governance for industrial data contracts.</div>
+      <div class="footer-links">
+        <span>Security</span>
+        <span>Compliance</span>
+        <span>Contact</span>
+      </div>
+    </footer>
+
+    </main>
+
+    <script src="main.js"></script>
+  </body>
+</html>

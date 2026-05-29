@@ -1,0 +1,5 @@
+.vscode/
+*.docx
+~$*.docx
+.DS_Store
+Thumbs.db
