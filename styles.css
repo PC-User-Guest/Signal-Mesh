@@ -29,6 +29,7 @@ body {
   background: radial-gradient(circle at top, #182538 0%, #0b0f14 60%);
   color: var(--text);
   min-height: 100vh;
+  line-height: 1.5;
 }
 
 .bg-grid {
@@ -62,7 +63,7 @@ body {
 }
 
 .hero {
-  padding: 40px 6vw 80px;
+  padding: clamp(28px, 5vw, 48px) 6vw clamp(56px, 8vw, 92px);
   position: relative;
   z-index: 1;
 }
@@ -73,6 +74,7 @@ body {
   justify-content: space-between;
   gap: 16px;
   margin-bottom: 56px;
+  flex-wrap: wrap;
 }
 
 .logo {
@@ -85,6 +87,7 @@ body {
   display: flex;
   gap: 20px;
   font-size: 0.95rem;
+  flex-wrap: wrap;
 }
 
 .nav-links a {
@@ -134,6 +137,7 @@ body {
   display: flex;
   gap: 12px;
   margin: 28px 0;
+  flex-wrap: wrap;
 }
 
 button {
@@ -203,6 +207,7 @@ button:active {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   border: 1px solid rgba(255, 255, 255, 0.08);
+  min-height: 320px;
 }
 
 .card-header {
@@ -266,7 +271,7 @@ button:active {
 }
 
 .section {
-  padding: 80px 6vw;
+  padding: clamp(56px, 7vw, 92px) 6vw;
   position: relative;
   z-index: 1;
 }
@@ -815,6 +820,8 @@ button:active {
   justify-content: space-between;
   color: var(--muted);
   border-top: 1px solid rgba(255, 255, 255, 0.08);
+  flex-wrap: wrap;
+  gap: 16px;
 }
 
 .footer-links {
@@ -828,12 +835,47 @@ button:active {
     align-items: flex-start;
   }
 
+  .nav-links {
+    width: 100%;
+  }
+
+  .nav-cta {
+    width: 100%;
+    text-align: center;
+  }
+
   .cockpit {
     grid-template-columns: 1fr;
   }
 
   .sim-panel.wide {
     grid-column: span 1;
+  }
+}
+
+@media (max-width: 680px) {
+  .hero {
+    padding-top: 24px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions button {
+    width: 100%;
+  }
+
+  .topology {
+    height: 240px;
+  }
+
+  .drawer-body {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
   }
 }
 
